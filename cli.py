@@ -70,7 +70,12 @@ class Pizza:
         """
         return PIZZAS[name][1]
 
-    def dict(self):
+    def dict(self) -> dict:
+        """Возвращает словарь с рецептом
+
+        Returns:
+            dict: Словарь с рецептом
+        """
         recipe = {'Шаг 0': 'Берем основу для пиццы'}
         for i, item in enumerate(PIZZAS[self.name][1]):
             recipe[f'Шаг {i+1}'] = f'Добавляем {item}'
@@ -78,13 +83,22 @@ class Pizza:
         return recipe
 
     def _valid_pizza_params(self) -> None:
+        """Валидация заданных параметров пиццы"""
         if self.name not in PIZZAS:
             raise KeyError('Пиццы с таким названием в меню не обнаружено.')
 
         if self.size not in ['L', 'XL']:
             raise KeyError('Пиццы такого размера нет.')
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
+        """Сравнение 2-х инстансов Pizza
+
+        Args:
+            other (Pizza): Инстанс класса Pizza, с которым сравниваем
+
+        Returns:
+            bool: True / False
+        """
         return (self.name == other.name) and (self.size == other.size)
 
 
@@ -131,6 +145,15 @@ def cli() -> None:
 @click.option('--size', default='L')
 @click.option('--delivery', default=False, is_flag=True)
 def order(name: str, size: str, delivery: bool) -> None:
+    """Вызывает make_order
+
+    Args:
+        name (str): Название пиццы
+        size (str): Размер пиццы
+        delivery (bool): Флаг доставки:
+            True -> доставка
+            False -> самовывоз
+    """
     make_order(name, size, delivery)
 
 

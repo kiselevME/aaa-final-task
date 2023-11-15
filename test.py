@@ -68,3 +68,21 @@ def test_pizza_equal(input, expected_result):
         assert pizza1 == pizza2
     else:
         assert not (pizza1 == pizza2)
+
+
+@pytest.mark.parametrize(
+        'input, expected_result',
+        [
+            (['Margherita', 'L'],
+             {'Шаг 0': 'Берем основу для пиццы',
+              'Шаг 1': 'Добавляем tomato sauce',
+              'Шаг 2': 'Добавляем mozzarella',
+              'Шаг 3': 'Добавляем tomatoes',
+              'Шаг 4': 'Запекаем до готовности'})
+        ]
+)
+def test_pizza_dict(input, expected_result):
+    pizza = cli.Pizza(input[0], input[1])
+    result = pizza.dict()
+
+    assert result == expected_result
