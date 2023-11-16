@@ -117,7 +117,7 @@ def make_order(name: str, size: str, delivery: bool) -> None:
     except KeyError:
         # mypy ругается на строку ниже, хотя аттрибут существует
         message = sys.exc_info()[1].args[0]
-        print(message)
+        click.echo(message)
         if message == 'Пиццы с таким названием в меню не обнаружено.':
             name = input('Пожалуйста, введите название пиццы: ')
         elif message == 'Пиццы такого размера нет.':
